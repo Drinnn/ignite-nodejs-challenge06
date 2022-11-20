@@ -63,6 +63,7 @@ describe('Authenticate User - Use Case', () => {
     const result = await sut.execute(input);
 
     expect(result).toHaveProperty('token');
+    expect(result.user.id).toBeDefined();
     expect(result.user.name).toEqual('John Doe');
     expect(result.user.email).toEqual('john@doe.com');
   });
