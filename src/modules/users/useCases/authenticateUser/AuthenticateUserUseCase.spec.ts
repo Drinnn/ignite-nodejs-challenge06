@@ -45,8 +45,6 @@ describe('Authenticate User - Use Case', () => {
   });
 
   it('should authenticate user', async () => {
-    process.env.JWT_SECRET = 'test';
-
     const user = new User();
     user.email = 'john@doe.com';
     user.password = hashSync('password', 8);
