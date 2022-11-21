@@ -1,3 +1,4 @@
+import { hash, hashSync } from 'bcryptjs';
 import { mock, MockProxy } from 'jest-mock-extended';
 import { User } from '../../entities/User';
 import { IUsersRepository } from '../../repositories/IUsersRepository';
@@ -42,7 +43,12 @@ describe('Create User - Use Case', () => {
 
     const sut = new CreateUserUseCase(usersRepository);
 
-    const result = await sut.execute(input);
-    expect(result).toHaveProperty('id');
+    await sut.execute(input);
+    expect(usersRepository.create).toHaveBeenCalledWith(
+      expect.objectContaining({
+        name: 'John Doe',
+        email: 'john@doe.com',
+      })
+    );
   });
 });
